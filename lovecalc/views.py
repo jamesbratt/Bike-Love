@@ -1,12 +1,15 @@
 import json
 
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.views.generic import View
 
 from strava.views import StravaApi
 
 
 class StravaTokenCheckMixin(object):
+    
     def dispatch(self, request, *args, **kwargs):
 
         code = request.GET.get('code', '')
@@ -20,6 +23,7 @@ class StravaTokenCheckMixin(object):
 
                 stravaData = stravaResponse.json()
                 request.session['token'] = stravaData['access_token']
+                request.session['athlete'] = stravaData['athlete']
             else:
                 return HttpResponseRedirect('/')
 
@@ -48,39 +52,35 @@ class ActivityListView(StravaTokenCheckMixin, TemplateView):
     
 class CalculateTheLove(StravaTokenCheckMixin, View):
 
-    def get(self, request **kwargs):
+    def get(self, request, **kwargs):
         
-        # Get the activity id
+        token = self.request.session.get('token')
+        activity = StravaApi().Activity(str(token), self.kwargs['activity_id'])
+        activityObj = activity.json()
         
-        # Get the full activity (dates required)
+        related_activities = StravaApi().related_activities(str(token), self.kwargs['activity_id'])
         
-        # Extract every segment id for each segment effort for the activity 
+        achievements = []
         
-        # Make a request for the related activities
+        total_segments = len(activityObj['segment_efforts']) * (len(related_activities.json()) + 1)
         
-        # Extract the athlete details from each related activity
+        achievements.append(
+            {
+                'athlete': self.request.session.get('athlete')['firstname'],
+                'achievements': activityObj['achievement_count']
+            }
+        )
         
-        # Now for every athlete, loop over each segment id
-        
-        # And make a segment effort request filtered by the athlete/activity date range
-        
-        # This should yield a segment effort id for every segment in the activity for each athlete in the group
-        
-        # Now for every athletes segment efforts make a request for that effort stream
-        
-        """
-        {
-            segment1: [
-                {athlete: 1, effort_id: 10, data: []},
-                {athlete: 2, effort_id: 23, data: []},
-            ],
-            segment2: [
-                {athlete: 1, effort_id: 45, data: []},
-                {athlete: 2, effort_id: 76, data: []},
-            ],
-        }
-        """
-        
-        # Now use Pythons zip tool to iterate over each effort in each segment
-        # And calculate the average distance between each athlete at each data point 
-        return HttpResponseRedirect('/')
+        for activity in related_activities.json():
+            obj = {
+                'athlete': activity['athlete']['firstname'],
+                'achievements': activity['achievement_count']
+            }
+            achievements.append(obj)
+            
+        achievement_sum = sum(achievement['achievements'] for achievement in achievements)
+        performance = round(achievement_sum/total_segments * 100, 0)
+            
+        results = [{'results': achievements, 'achievement_potential': total_segments, 'performance': int(performance)}]
+            
+        return HttpResponse(results)

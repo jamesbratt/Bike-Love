@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.views.generic import View
 
-# Create your views here.
+class Logout(View):
+
+    def get(self, request, **kwargs):
+        
+        if 'token' in request.session:
+            del request.session['token']
+            del request.session['athlete']
+            
+        return HttpResponseRedirect('/')

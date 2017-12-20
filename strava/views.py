@@ -15,5 +15,16 @@ class StravaApi():
         headers = {'Authorization':'Bearer ' + token}
         getActivities = requests.get(settings.API_URL + 'athlete/activities', verify=False, headers=headers)
         response = getActivities
-        print(response)
+        return response
+    
+    def Activity(self, token, activity_id):
+        headers = {'Authorization':'Bearer ' + token}
+        getActivity = requests.get(settings.API_URL + 'activities/' + str(activity_id) + '/?include_all_efforts=true', verify=False, headers=headers)
+        response = getActivity
+        return response
+    
+    def related_activities(self, token, activity_id):
+        headers = {'Authorization':'Bearer ' + token}
+        get_related = requests.get(settings.API_URL + 'activities/' + str(activity_id) + '/related', verify=False, headers=headers)
+        response = get_related
         return response
