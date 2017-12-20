@@ -6,7 +6,7 @@
 	{% if group_activities %}
 		<ul>
 		{% for activity in group_activities %}
-			<li>{{ activity.name }}  {{ activity.athlete_count }} <a href="activities/{{ activity.id }}">Feel the love</a></li>
+			<li>{{ activity.name }}  {{ activity.athlete_count }} <a href="{{ activity.id }}">Feel the love</a></li>
 		{% endfor %}
 		</ul>
 	{% endif %}
