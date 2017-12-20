@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Bike Love</title>
+</head>
+<body>
+	{% if group_activities %}
+		<ul>
+		{% for activity in group_activities %}
+			<li>{{ activity.name }}  {{ activity.athlete_count }} <a href="activities/{{ activity.id }}">Feel the love</a></li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+</body>
+</html>
