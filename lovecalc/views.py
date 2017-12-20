@@ -1,7 +1,7 @@
 import json
 
 from django.http import HttpResponseRedirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic import View
 
@@ -48,6 +48,22 @@ class ActivityListView(StravaTokenCheckMixin, TemplateView):
 
         context['group_activities'] = group_activities
         return context
+
+
+class AchievementResultsView(TemplateView):
+ 
+    template_name = 'lovecalc/achievement-results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AchievementResultsView, self).get_context_data(**kwargs)
+        return context
+    
+
+class FetchCalculation(View):
+
+    def get(self, request, **kwargs):
+        if request.is_ajax():
+            return JsonResponse({})
     
     
 class CalculateTheLove(StravaTokenCheckMixin, View):

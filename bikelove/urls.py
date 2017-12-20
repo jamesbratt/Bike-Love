@@ -17,5 +17,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('landingpage.urls')),
-    path('activities', include('lovecalc.urls')),
+    path('activities/', include('lovecalc.urls')),
 ]
