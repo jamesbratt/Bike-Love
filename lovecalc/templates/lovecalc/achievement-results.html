@@ -1,1 +1,13 @@
-Results
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="circle" id="circles-1"></div>
+<p></p>
+{% csrf_token %}
+{% endblock content %}
+	
+{% block scripts %}
+{{ super }}
+<script src="{% static 'circles.min.js' %}"></script>
+<script src="{% static 'lovecalc/achievement-results.js' %}"></script>
+{% endblock scripts %}
