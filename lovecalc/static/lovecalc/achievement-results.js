@@ -42,6 +42,10 @@ $( document ).ready(function() {
 	    		styleText: true
     		});
 	    	
+	    	$.each(data.results, function(index, athlete) {
+	    	    $('ul').append('<li>'+ athlete.athlete +' - ' + athlete.achievements + '</li>')
+	    	});
+	    	
 	    	$('p').html('Potential achievements attained as a group');
 	    },
 	    error: function (request, status, error) {

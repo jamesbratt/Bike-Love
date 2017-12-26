@@ -112,6 +112,14 @@ class CalculateTheLove(StravaTokenCheckMixin, View):
                 return HttpResponse(e)
             
             achievements = []
+            base_activity = {
+                'name': activityObj['name'],
+                'distance': activityObj['distance'],
+                'elevation_gain': activityObj['total_elevation_gain'],
+                'type': activityObj['type'],
+                'route': activityObj['map']['polyline'],
+                'athlete': self.request.session.get('athlete')['firstname'],
+            }
             
             total_segments = len(activityObj['segment_efforts']) * (len(related_activities.json()) + 1)
             
@@ -137,7 +145,8 @@ class CalculateTheLove(StravaTokenCheckMixin, View):
             results = {
                 'results': achievements,
                 'achievement_potential': total_segments,
-                'performance': int(performance)
+                'performance': int(performance),
+                'activity': base_activity
             }
             
             new_calculation = LoveCalculation.objects.create(
