@@ -1,15 +1,25 @@
 {% load staticfiles %}
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Bike Love</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	
+	    <title>AthleteLove</title>
+	
+	    <!-- Bootstrap core CSS -->
+	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	
+	    <!-- Custom fonts for this template -->
+	    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	    <link href="{% static 'simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+	    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+	
+	    <!-- Custom styles for this template -->
+	    <link href="{% static 'landing-page.css' %}" rel="stylesheet">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
 		{% block stylesheets %}
 		{% endblock stylesheets %}
     </head>
@@ -17,11 +27,19 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
+        
+		  <!-- Navigation -->
+		  <nav class="navbar navbar-light bg-light static-top">
+		    <div class="container">
+		      <a class="navbar-brand" href="#">AthleteLove</a>
+		    </div>
+		  </nav>
+		  
 		{% block content %}
 		{% endblock content %}
 		
 		<script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 		{% block scripts %}
 		{% endblock scripts %}
     </body>
