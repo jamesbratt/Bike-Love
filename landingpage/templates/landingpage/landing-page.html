@@ -1,11 +1,3 @@
-<!-- <html>
-<head>
-<title>Bike Love</title>
-</head>
-<body>
-	<a href="https://www.strava.com/oauth/authorize?client_id=9906&response_type=code&redirect_uri=http://localhost:8000/activities">Connect</a>
-</body>
-</html>-->
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
@@ -20,7 +12,7 @@
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">           
           	<div class="form-row">
-                <a href="submit" id="strava-connect"><img src="{% static 'img/btn_strava_connectwith_orange@2x.png' %}"></a>
+                <a href="https://www.strava.com/oauth/authorize?client_id=9906&response_type=code&redirect_uri=http://localhost:8000/activities" id="strava-connect"><img src="{% static 'img/btn_strava_connectwith_orange@2x.png' %}"></a>
             </div>
         </div>
       </div>
