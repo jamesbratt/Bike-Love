@@ -13,9 +13,9 @@ class StravaApi():
             raise ValueError(response.json()['message'])
         return response
 
-    def Activities(self, token):
+    def Activities(self, token, page):
         headers = {'Authorization':'Bearer ' + token}
-        getActivities = requests.get(settings.API_URL + 'athlete/activities', verify=False, headers=headers)
+        getActivities = requests.get(settings.API_URL + 'athlete/activities/?per_page=10&page=' + page, verify=False, headers=headers)
         response = getActivities
         if response.status_code is not 200:
             raise ValueError(response.json()['message'])

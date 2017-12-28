@@ -1,14 +1,76 @@
-<html>
-<head>
-<title>Bike Love</title>
-</head>
-<body>
-	{% if group_activities %}
-		<ul>
-		{% for activity in group_activities %}
-			<li>{{ activity.name }}  {{ activity.athlete_count }} <a href="{{ activity.id }}">Feel the love</a></li>
-		{% endfor %}
-		</ul>
-	{% endif %}
-</body>
-</html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+	  		<div class="row">
+		  		<div class="col-md-8">
+			    	<h1>Group Activities</h1>
+			    	<p class="lead">Group activities have been filtered out from your entire Strava activity log.
+			    	You can now view an activities team performance rating.</p>
+		  		</div>
+	  		</div>
+  		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<span>Total Group Activities: {{ group_activities|length }}</span>
+			</div>
+			<div class="col-md-6 d-none d-sm-block">
+				<nav aria-label="...">
+			  		<ul class="pagination justify-content-end">
+					    <li class="page-item {% if is_first_page is True %}disabled{% endif %}">
+				      		<a class="page-link" href="/activities/?page={{prev_page}}" tabindex="-1">Previous</a>
+					    </li>
+					    <li class="page-item {% if is_last_page is True %}disabled{% endif %}">
+				      		<a class="page-link" href="/activities/?page={{next_page}}">Next</a>
+					    </li>
+			  		</ul>
+				</nav>
+				<span class="pull-right">Page: {{ page }}</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			{% if total_activities %}
+				{% for activity in total_activities %}
+					<div class="row activity-inner {% if activity.athlete_count == 1 %}disabled{% endif %}">
+						<div class="col-md-1">
+							{% if activity.athlete_count > 1 %}
+								<i class="fa fa-users fa-2x fa-fw"></i>
+							{% else %}
+								<i class="fa fa-user fa-2x fa-fw"></i>
+							{% endif %}
+						</div>
+						<div class="col-md-11">
+							<ul class="list-inline">
+						  		<li class="list-inline-item">{{ activity.name }}</li>
+						  		<li class="list-inline-item"><strong>Athletes: </strong>{{ activity.athlete_count }}</li>
+						  		<li class="list-inline-item">{{ activity.start_date }}</li>
+						  		<li class="list-inline-item">{{ activity.type }}</li>
+							</ul>
+						   {% if activity.athlete_count > 1 %}<a class="pull-right btn btn-primary" href="{{ activity.id }}">Calculate Performance</a>{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<nav aria-label="...">
+			  		<ul class="pagination justify-content-end">
+					    <li class="page-item {% if is_first_page is True %}disabled{% endif %}">
+				      		<a class="page-link" href="/activities/?page={{prev_page}}" tabindex="-1">Previous</a>
+					    </li>
+					    <li class="page-item {% if is_last_page is True %}disabled{% endif %}">
+				      		<a class="page-link" href="/activities/?page={{next_page}}">Next</a>
+					    </li>
+			  		</ul>
+				</nav>
+				<p class="pull-right">Page: {{ page }}</p>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -38,8 +38,33 @@ class ActivityListView(StravaTokenCheckMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ActivityListView, self).get_context_data(**kwargs)
         token = self.request.session.get('token')
-        stravaData = StravaApi().Activities(str(token))
+        page = self.request.GET.get('page', '')
+        
+        is_last_page = False
+        is_first_page = False
+        
+        if page is '' or page == '0':
+            page = 1
+        
+        if page is 1 or page is '1':
+            is_first_page = True
+        
+        try:
+            stravaData = StravaApi().Activities(str(token), str(page))
+        except ValueError as e:
+            return HttpResponse(e)
+
         activities = stravaData.json()
+        
+        if len(activities) > 0:
+            next_page = int(page) + 1
+            try:
+                check_next_page = StravaApi().Activities(str(token), str(next_page))
+            except ValueError as e:
+                return HttpResponse(e)
+
+            if len(check_next_page.json()) == 0:
+                is_last_page = True 
         
         group_activities = []
         
@@ -48,6 +73,13 @@ class ActivityListView(StravaTokenCheckMixin, TemplateView):
                 group_activities.append(activity)
 
         context['group_activities'] = group_activities
+        context['total_activities'] = activities
+
+        context['is_last_page'] = is_last_page
+        context['is_first_page'] = is_first_page
+        context['next_page'] = int(page) + 1
+        context['prev_page'] = int(page) - 1
+        context['page'] = page
         return context
 
 
