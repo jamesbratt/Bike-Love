@@ -9,6 +9,13 @@ $( document ).ready(function() {
     	var id = url.substring(url.lastIndexOf('/') + 1);
     	return '/activities/calculation/' + id;
     }
+    
+    $('#copy-url-btn').on('click', function() {
+    	var copyText = document.getElementById("copy-url");
+    	copyText.select();
+	    document.execCommand("Copy");
+	    alert('The link has been copied to your clipboard, now share it with your friends on Strava!');
+    });
 
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -66,6 +73,7 @@ $( document ).ready(function() {
 	    	$('#distance').append(data.activity.distance);
 	    	$('#activity-type').append(data.activity.type);
 	    	$('#elevation').append(data.activity.elevation_gain);
+	    	$('#copy-url').val(window.location.href);
 	    },
 	    error: function (request, status, error) {
 	    	console.log('error');
