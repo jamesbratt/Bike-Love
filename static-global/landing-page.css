@@ -51,6 +51,27 @@ header.masthead {
 	max-width:100%;
 }
 
+.circles-wrp svg {
+	display:block;
+	margin:0 auto;
+}
+
+#circles-1 {
+	margin-bottom:2em;	
+}
+
+#individuals .card {
+	margin-bottom:1em;
+}
+
+#individuals img {
+	display:block;
+}
+
+#activity-stats {
+	margin-bottom:2em;
+}
+
 .activity-inner {
 	-moz-box-shadow: 0px 0px 2px -1px #888;
 	-webkit-box-shadow: 0px 0px 2px -1px #888;

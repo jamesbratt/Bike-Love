@@ -27,7 +27,7 @@ $( document ).ready(function() {
 	    success: function(data) {
 	    	var myCircle = Circles.create({
 	    		id: 'circles-1',
-	    		radius: 60,
+	    		radius: 90,
 	    		value: data.performance,
 	    		maxValue: 100,
 	    		width: 10,
@@ -38,15 +38,34 @@ $( document ).ready(function() {
 	    		textClass: 'circles-text',
 	    		valueStrokeClass: 'circles-valueStroke',
 	    		maxValueStrokeClass: 'circles-maxValueStroke',
-	    		styleWrapper: true,
+	    		styleWrapper: false,
 	    		styleText: true
     		});
 	    	
 	    	$.each(data.results, function(index, athlete) {
-	    	    $('ul').append('<li>'+ athlete.athlete +' - ' + athlete.achievements + '</li>')
+	    		$('#individuals').append(
+				'<div class="card">'+
+					'<div class="card-body">'+
+						'<div class="row">'+
+							'<div class="col-md-4">'+
+								'<img src="'+ athlete.profile +'" alt="..." class="rounded-circle mx-auto margin" width="100">'+
+							'</div>'+
+							'<div class="col-md-8">'+
+							    '<h5 class="card-title">'+ athlete.athlete +'</h5>'+
+							    '<h6 class="card-subtitle mb-2 text-muted">Attained '+ athlete.achievements +' achievements</h6>'+
+							    '<a href="#" class="card-link">View Activity</a>'+
+						    '</div>'+
+					    '</div>'+
+				    '</div>'+	    
+	  			'</div>'				    
+			    );    		
 	    	});
 	    	
-	    	$('p').html('Potential achievements attained as a group');
+	    	$('h1').append(data.activity.name);
+	    	$('#potential').append(data.achievement_potential);
+	    	$('#distance').append(data.activity.distance);
+	    	$('#activity-type').append(data.activity.type);
+	    	$('#elevation').append(data.activity.elevation_gain);
 	    },
 	    error: function (request, status, error) {
 	    	console.log('error');

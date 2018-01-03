@@ -158,6 +158,7 @@ class CalculateTheLove(StravaTokenCheckMixin, View):
             achievements.append(
                 {
                     'athlete': self.request.session.get('athlete')['firstname'],
+                    'profile': self.request.session.get('athlete')['profile_medium'],
                     'achievements': activityObj['achievement_count'],
                     'activity_id': activityObj['id']
                 }
@@ -166,6 +167,7 @@ class CalculateTheLove(StravaTokenCheckMixin, View):
             for activity in related_activities.json():
                 obj = {
                     'athlete': activity['athlete']['firstname'],
+                    'profile': activity['athlete']['profile'],
                     'achievements': activity['achievement_count'],
                     'activity_id': activity['id']
                 }

@@ -1,10 +1,48 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="circle" id="circles-1"></div>
-<p></p>
-<ul></ul>
-{% csrf_token %}
+	<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+	  		<div class="row">
+		  		<div class="col-md-12">
+			    	<h1 class="text-center">
+			    		<small class="text-muted">Team performance for</small></br>
+			    	</h1>
+		  		</div>
+	  		</div>
+  		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="sticky-top">
+					<div class="circle" id="circles-1"></div>
+					<ul id="activity-stats" class="list-group">
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Potential Achievements
+					    	<span id="potential" class="badge badge-primary badge-pill"></span>
+				  		</li>
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Activity Type
+					    	<span id="activity-type" class="badge badge-primary badge-pill"></span>
+				  		</li>
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Distance
+					    	<span id="distance" class="badge badge-primary badge-pill"></span>
+			  			</li>
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Elevation Gain
+					    	<span id="elevation" class="badge badge-primary badge-pill"></span>
+				  		</li>
+					</ul>
+				</div>
+			</div>
+			<div id="individuals" class="col-md-7 offset-md-1">
+
+			</div>
+		</div>
+	</div>
+	{% csrf_token %}
 {% endblock content %}
 	
 {% block scripts %}
