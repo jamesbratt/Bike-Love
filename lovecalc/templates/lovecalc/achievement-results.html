@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+	  		<div class="row">
+		  		<div class="col-md-12">
+			    	<h1 class="text-center">
+			    		<small class="text-muted">Team performance for</small></br>
+			    	</h1>
+		  		</div>
+	  		</div>
+  		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="sticky-top">
+					<div class="circle" id="circles-1"></div>
+					<ul id="activity-stats" class="list-group">
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Potential Achievements
+					    	<span id="potential" class="badge badge-primary badge-pill"></span>
+				  		</li>
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Activity Type
+					    	<span id="activity-type" class="badge badge-primary badge-pill"></span>
+				  		</li>
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Distance
+					    	<span id="distance" class="badge badge-primary badge-pill"></span>
+			  			</li>
+				  		<li class="list-group-item d-flex justify-content-between align-items-center">
+					    	Elevation Gain
+					    	<span id="elevation" class="badge badge-primary badge-pill"></span>
+				  		</li>
+					</ul>
+				</div>
+			</div>
+			<div id="individuals" class="col-md-7 offset-md-1"></div>
+		</div>
+		<div id="share" class="row">
+			<div class="col-md-12">
+				<h2 class="text-center">Share your performance</h2>
+				<p class="text-center lead">Copy the link for this page and paste it into a post on Strava to share it with your followers.</p>
+			  	<div class="form-group row">
+				    <div class="col-sm-12 col-md-9 col-lg-10">
+			      		<input id="copy-url" readonly type="text" class="form-control form-control-lg">
+				    </div>
+				    <div class="col-sm-12 col-md-3 col-lg-2">
+			    		<button id="copy-url-btn" class="btn btn-primary btn-lg btn-block">Copy Link</button>
+				    </div>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	{% csrf_token %}
+{% endblock content %}
+	
+{% block scripts %}
+{{ super }}
+<script src="{% static 'circles.min.js' %}"></script>
+<script src="{% static 'lovecalc/achievement-results.js' %}"></script>
+{% endblock scripts %}
