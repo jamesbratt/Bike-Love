@@ -73,7 +73,19 @@ header.masthead {
 }
 
 #share {
-	margin: 3em 0;
+	margin: 5em 0;
+}
+
+#try {
+	margin: 5em 0;
+}
+
+#interested {
+	margin: 5em 0;	
+}
+
+#interested.invisible {
+	margin: 0;	
 }
 
 .activity-inner {

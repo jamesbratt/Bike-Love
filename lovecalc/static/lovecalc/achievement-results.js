@@ -1,8 +1,8 @@
 $( document ).ready(function() {
 	
-    function getCsrf() {
-    	return $('input[name=csrfmiddlewaretoken]').val();
-    }
+	if(Cookies.get('feedback') !== 'true') {
+		$('#interested').removeClass('invisible');
+	}
     
     function getCalculationId() {
     	var url = window.location.href;
@@ -15,14 +15,6 @@ $( document ).ready(function() {
     	copyText.select();
 	    document.execCommand("Copy");
 	    alert('The link has been copied to your clipboard, now share it with your friends on Strava!');
-    });
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                xhr.setRequestHeader("X-CSRFToken", getCsrf());
-            }
-        }
     });
 	
 	$.ajax({
@@ -60,7 +52,7 @@ $( document ).ready(function() {
 							'<div class="col-md-8">'+
 							    '<h5 class="card-title">'+ athlete.athlete +'</h5>'+
 							    '<h6 class="card-subtitle mb-2 text-muted">Attained '+ athlete.achievements +' achievements</h6>'+
-							    '<a href="#" class="card-link">View Activity</a>'+
+							    '<a target="_blank" href="https://www.strava.com/activities/'+ athlete.activity_id +'" class="card-link">View Activity</a>'+
 						    '</div>'+
 					    '</div>'+
 				    '</div>'+	    
@@ -79,4 +71,29 @@ $( document ).ready(function() {
 	    	console.log('error');
 	    }
 	});
+	
+    $('.feedback').on('click', function(e) {
+    	var feedback = false;
+    	var answer = e.target.innerHTML;
+    	if(answer === 'Yes!') {
+    		feedback = true;
+    	}
+    	$.ajax({
+    	    url: '/feedback/',
+    	    type: 'POST',
+    	    data: {feedback:feedback},
+    	    dataType: 'json',
+    	    beforeSend: function(xhr, settings) {
+    	      $.ajaxSettings.beforeSend(xhr, settings);
+    	    },
+    	    success: function(data) {
+    	    	Cookies.set('feedback', 'true');
+    	    	$('#interested').addClass('invisible');
+    	    	$('#feedbackSuccess').modal('show');
+    	    },
+    	    error: function (request, status, error) {
+    	    	alert('Error!');
+    	    }
+    	});
+    });
 });

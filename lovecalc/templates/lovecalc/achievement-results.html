@@ -17,6 +17,7 @@
 			<div class="col-md-4">
 				<div class="sticky-top">
 					<div class="circle" id="circles-1"></div>
+					<p><small>Performance rating based on number of potential segment achievements attained as a group, for this activity.</small></p>
 					<ul id="activity-stats" class="list-group">
 				  		<li class="list-group-item d-flex justify-content-between align-items-center">
 					    	Potential Achievements
@@ -39,26 +40,83 @@
 			</div>
 			<div id="individuals" class="col-md-7 offset-md-1"></div>
 		</div>
-		<div id="share" class="row">
-			<div class="col-md-12">
-				<h2 class="text-center">Share your performance</h2>
-				<p class="text-center lead">Copy the link for this page and paste it into a post on Strava to share it with your followers.</p>
-			  	<div class="form-group row">
-				    <div class="col-sm-12 col-md-9 col-lg-10">
-			      		<input id="copy-url" readonly type="text" class="form-control form-control-lg">
-				    </div>
-				    <div class="col-sm-12 col-md-3 col-lg-2">
-			    		<button id="copy-url-btn" class="btn btn-primary btn-lg btn-block">Copy Link</button>
-				    </div>
-			  	</div>
+		<div id="interested" class="row invisible">
+	        <div class="col-md-12">
+	        	<h2 class="text-center">We need your feedback!</h2>
+	        	<p class="text-center lead">Would you be interested in setting a team performance goal for the next time you ride/run this activity?</p>
+        	</div>           
+          	<div class="col-md-12">
+				<div class="btn-group btn-block btn-group-lg justify-content-center" role="group" aria-label="...">
+				    <button type="button" class="btn btn-primary feedback">Yes!</button>
+				    <button type="button" class="btn btn-secondary feedback">No thanks</button>
+				</div>     
+	        </div>
+        </div>
+	</div>
+	<section class="call-to-action text-white text-center">
+   		<div class="overlay"></div>
+	   	<div class="container">
+		     <div class="row">
+				<div class="col-md-12">
+					<h3 class="text-center">Share your performance</h3>
+					<p class="text-center lead">Copy the link for this page and paste it into a post on Strava to share it with your followers.</p>
+				  	<div class="form-group row">
+					    <div class="col-xl-10">
+				      		<input id="copy-url" readonly type="text" class="form-control form-control-lg">
+					    </div>
+					    <div class="col-xl-2 d-none d-xl-block">
+				    		<button id="copy-url-btn" class="btn btn-primary btn-lg btn-block">Copy Link</button>
+					    </div>
+				  	</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="call-to-action text-center">
+    	<div class="container">
+    		<div class="row">
+		        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+		        	<h4 class="text-center">Not tried using Superchamp?</h4>           
+		          	<div class="form-row">
+		                <a href="https://www.strava.com/oauth/authorize?client_id=9906&response_type=code&redirect_uri=http://gosuperchamp.com/activities" id="strava-connect"><img src="{% static 'img/btn_strava_connectwith_orange@2x.png' %}"></a>
+		            </div>
+		        </div>
+     		</div>
+    	</div>
+	</section>
+	<div class="modal fade" id="feedbackSuccess" tabindex="-1" role="dialog" aria-labelledby="feedbackSuccessLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="feedbackSuccessLabel">Thanks for your feedback!</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  		<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>It's the athletes that choose to use Superchamp that drive what
+					features are created to enable improved activity performance through working as a team.</p>
+					<p>If you would like to keep up to date with Superchamps latest developments, then sign up to
+					our newsletter below, or follow us on Twitter.</p>
+	         		<form>
+		           		<div class="form-row">
+		             		<div class="col-12 col-md-9 mb-2 mb-md-0">
+		               			<input type="email" class="form-control form-control-lg modalsignupemail" placeholder="Enter your email...">
+		             		</div>
+		             		<div class="col-12 col-md-3">
+			               		<button type="submit" class="btn btn-block btn-lg btn-primary modalsignup">Sign up!</button>
+		             		</div>
+		           		</div>
+	         		</form>
+				</div>
 			</div>
 		</div>
 	</div>
-	{% csrf_token %}
 {% endblock content %}
 	
 {% block scripts %}
 {{ super }}
 <script src="{% static 'circles.min.js' %}"></script>
+<script src="{% static 'jscookie.js' %}"></script>
 <script src="{% static 'lovecalc/achievement-results.js' %}"></script>
 {% endblock scripts %}
