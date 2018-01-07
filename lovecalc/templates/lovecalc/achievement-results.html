@@ -17,6 +17,7 @@
 			<div class="col-md-4">
 				<div class="sticky-top">
 					<div class="circle" id="circles-1"></div>
+					<p><small>Performance rating based on number of potential segment achievements attained as a group, for this activity.</small></p>
 					<ul id="activity-stats" class="list-group">
 				  		<li class="list-group-item d-flex justify-content-between align-items-center">
 					    	Potential Achievements
@@ -39,7 +40,7 @@
 			</div>
 			<div id="individuals" class="col-md-7 offset-md-1"></div>
 		</div>
-		<div id="interested" class="row">
+		<div id="interested" class="row invisible">
 	        <div class="col-md-12">
 	        	<h2 class="text-center">We need your feedback!</h2>
 	        	<p class="text-center lead">Would you be interested in setting a team performance goal for the next time you ride/run this activity?</p>
@@ -83,11 +84,39 @@
      		</div>
     	</div>
 	</section>
-	{% csrf_token %}
+	<div class="modal fade" id="feedbackSuccess" tabindex="-1" role="dialog" aria-labelledby="feedbackSuccessLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="feedbackSuccessLabel">Thanks for your feedback!</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  		<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>It's the athletes that choose to use Superchamp that drive what
+					features are created to enable improved activity performance through working as a team.</p>
+					<p>If you would like to keep up to date with Superchamps latest developments, then sign up to
+					our newsletter below, or follow us on Twitter.</p>
+	         		<form>
+		           		<div class="form-row">
+		             		<div class="col-12 col-md-9 mb-2 mb-md-0">
+		               			<input type="email" class="form-control form-control-lg modalsignupemail" placeholder="Enter your email...">
+		             		</div>
+		             		<div class="col-12 col-md-3">
+			               		<button type="submit" class="btn btn-block btn-lg btn-primary modalsignup">Sign up!</button>
+		             		</div>
+		           		</div>
+	         		</form>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock content %}
 	
 {% block scripts %}
 {{ super }}
 <script src="{% static 'circles.min.js' %}"></script>
+<script src="{% static 'jscookie.js' %}"></script>
 <script src="{% static 'lovecalc/achievement-results.js' %}"></script>
 {% endblock scripts %}

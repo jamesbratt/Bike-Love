@@ -37,6 +37,7 @@
 		  
 		{% block content %}
 		{% endblock content %}
+		{% csrf_token %}
 
 		 <section class="call-to-action text-white text-center">
 		   <div class="overlay"></div>
@@ -52,10 +53,10 @@
 		         <form>
 		           <div class="form-row">
 		             <div class="col-12 col-md-9 mb-2 mb-md-0">
-		               <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+		               <input type="email" class="form-control form-control-lg signupemail" placeholder="Enter your email...">
 		             </div>
 		             <div class="col-12 col-md-3">
-		               <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+		               <button type="submit" class="btn btn-block btn-lg btn-primary signup">Sign up!</button>
 		             </div>
 		           </div>
 		         </form>
@@ -91,6 +92,8 @@
 		
 		<script src="{% static 'jquery-3.2.1.min.js' %}"></script>
 		<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'ajaxcsrf.js' %}"></script>
+		<script src="{% static 'mailinglist/subscribe.js' %}"></script>
 		{% block scripts %}
 		{% endblock scripts %}
     </body>

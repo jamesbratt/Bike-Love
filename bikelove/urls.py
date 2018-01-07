@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('landingpage.urls')),
     path('activities/', include('lovecalc.urls')),
     path('feedback/', include('feedback.urls')),
+    path('subscribe/', include('mailinglist.urls')),
 ]

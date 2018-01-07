@@ -1,8 +1,8 @@
 $( document ).ready(function() {
 	
-    function getCsrf() {
-    	return $('input[name=csrfmiddlewaretoken]').val();
-    }
+	if(Cookies.get('feedback') !== 'true') {
+		$('#interested').removeClass('invisible');
+	}
     
     function getCalculationId() {
     	var url = window.location.href;
@@ -15,14 +15,6 @@ $( document ).ready(function() {
     	copyText.select();
 	    document.execCommand("Copy");
 	    alert('The link has been copied to your clipboard, now share it with your friends on Strava!');
-    });
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                xhr.setRequestHeader("X-CSRFToken", getCsrf());
-            }
-        }
     });
 	
 	$.ajax({
@@ -95,7 +87,9 @@ $( document ).ready(function() {
     	      $.ajaxSettings.beforeSend(xhr, settings);
     	    },
     	    success: function(data) {
-    	    	alert('success');
+    	    	Cookies.set('feedback', 'true');
+    	    	$('#interested').addClass('invisible');
+    	    	$('#feedbackSuccess').modal('show');
     	    },
     	    error: function (request, status, error) {
     	    	alert('Error!');
