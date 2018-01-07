@@ -60,7 +60,7 @@ $( document ).ready(function() {
 							'<div class="col-md-8">'+
 							    '<h5 class="card-title">'+ athlete.athlete +'</h5>'+
 							    '<h6 class="card-subtitle mb-2 text-muted">Attained '+ athlete.achievements +' achievements</h6>'+
-							    '<a href="#" class="card-link">View Activity</a>'+
+							    '<a target="_blank" href="https://www.strava.com/activities/'+ athlete.activity_id +'" class="card-link">View Activity</a>'+
 						    '</div>'+
 					    '</div>'+
 				    '</div>'+	    
