@@ -79,4 +79,27 @@ $( document ).ready(function() {
 	    	console.log('error');
 	    }
 	});
+	
+    $('.feedback').on('click', function(e) {
+    	var feedback = false;
+    	var answer = e.target.innerHTML;
+    	if(answer === 'Yes!') {
+    		feedback = true;
+    	}
+    	$.ajax({
+    	    url: '/feedback/',
+    	    type: 'POST',
+    	    data: {feedback:feedback},
+    	    dataType: 'json',
+    	    beforeSend: function(xhr, settings) {
+    	      $.ajaxSettings.beforeSend(xhr, settings);
+    	    },
+    	    success: function(data) {
+    	    	alert('success');
+    	    },
+    	    error: function (request, status, error) {
+    	    	alert('Error!');
+    	    }
+    	});
+    });
 });
