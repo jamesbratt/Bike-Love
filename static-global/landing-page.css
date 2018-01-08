@@ -18,7 +18,7 @@ h6 {
 header.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("img/bg-masthead.jpg") no-repeat center center;
+  background: url("img/bg-1.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -41,6 +41,10 @@ header.masthead {
       padding-bottom: 12rem; }
       header.masthead h1 {
         font-size: 3rem; } }
+
+.twitter-follow-button {
+	margin-top: 2em;
+}
 
 #strava-connect {
 	margin: 0 auto;
