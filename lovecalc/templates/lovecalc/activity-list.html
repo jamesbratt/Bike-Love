@@ -40,7 +40,7 @@
 				  		<div class="card-body">
 					    	<p class="card-text"><strong>Athletes: </strong>{{ activity.athlete_count }}</p>
 					    	<p class="card-text"><strong>Activity Type: </strong>{{ activity.type }}</p>
-				    		<a class="btn {% if activity.athlete_count == 1 %}disabled btn-secondary{% else %} btn-primary{% endif %}" href="{{ activity.id }}">View Group Performance</a>
+				    		<a class="btn {% if activity.athlete_count == 1 %}disabled non-group btn-secondary{% else %} btn-primary{% endif %}" href="{{ activity.id }}">View Group Performance</a>
 				  		</div>
 					</div>
 				</div>

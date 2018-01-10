@@ -90,6 +90,13 @@
 		<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 		<script src="{% static 'ajaxcsrf.js' %}"></script>
 		<script src="{% static 'mailinglist/subscribe.js' %}"></script>
+		<script>
+			$( document ).ready(function() {
+			    $('.card.bg-light').on('click', function() {
+				    alert('This is not a group activity!!');
+			    });
+			});
+		</script>
 		{% block scripts %}
 		{% endblock scripts %}
     </body>
