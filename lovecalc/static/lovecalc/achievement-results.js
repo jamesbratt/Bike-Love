@@ -62,9 +62,9 @@ $( document ).ready(function() {
 	    	
 	    	$('h1').append(data.activity.name);
 	    	$('#potential').append(data.achievement_potential);
-	    	$('#distance').append(data.activity.distance);
+	    	$('#distance').append(((data.activity.distance/1000).toFixed(1)) + ' km / ' + (data.activity.distance/1609).toFixed(1) + ' mi');
 	    	$('#activity-type').append(data.activity.type);
-	    	$('#elevation').append(data.activity.elevation_gain);
+	    	$('#elevation').append(data.activity.elevation_gain + ' m');
 	    	$('#copy-url').val(window.location.href);
 	    },
 	    error: function (request, status, error) {

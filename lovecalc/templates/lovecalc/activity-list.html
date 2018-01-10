@@ -31,32 +31,24 @@
 				<span class="pull-right">Page: {{ page }}</span>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-			{% if total_activities %}
-				{% for activity in total_activities %}
-					<div class="row activity-inner {% if activity.athlete_count == 1 %}disabled{% endif %}">
-						<div class="col-md-1">
-							{% if activity.athlete_count > 1 %}
-								<i class="fa fa-users fa-2x fa-fw"></i>
-							{% else %}
-								<i class="fa fa-user fa-2x fa-fw"></i>
-							{% endif %}
-						</div>
-						<div class="col-md-11">
-							<ul class="list-inline">
-						  		<li class="list-inline-item">{{ activity.name }}</li>
-						  		<li class="list-inline-item"><strong>Athletes: </strong>{{ activity.athlete_count }}</li>
-						  		<li class="list-inline-item">{{ activity.start_date }}</li>
-						  		<li class="list-inline-item">{{ activity.type }}</li>
-							</ul>
-						   {% if activity.athlete_count > 1 %}<a class="pull-right btn btn-primary" href="{{ activity.id }}">Calculate Performance</a>{% endif %}
-						</div>
+		{% if total_activities %}
+		{% for activity in total_activities %}
+			{% if forloop.first %}<div class="row activities">{% endif %}
+				<div class="col-md-6">
+					<div class="card {% if activity.athlete_count == 1 %}bg-light{% endif %}">
+				  		<h5 class="card-header">{{ activity.name }}</h5>
+				  		<div class="card-body">
+					    	<p class="card-text"><strong>Athletes: </strong>{{ activity.athlete_count }}</p>
+					    	<p class="card-text"><strong>Activity Type: </strong>{{ activity.type }}</p>
+				    		<a class="btn {% if activity.athlete_count == 1 %}disabled btn-secondary{% else %} btn-primary{% endif %}" href="{{ activity.id }}">View Group Performance</a>
+				  		</div>
 					</div>
-				{% endfor %}
-			{% endif %}
-			</div>
-		</div>
+				</div>
+		    {% if forloop.counter|divisibleby:2 %}</div><div class="row activities">{% endif %}
+		    {% if forloop.last %}</div>{% endif %}
+		{% endfor %}
+		{% endif %}
+
 		<div class="row">
 			<div class="col-md-12">
 				<nav aria-label="...">
