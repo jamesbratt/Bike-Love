@@ -42,6 +42,15 @@ header.masthead {
       header.masthead h1 {
         font-size: 3rem; } }
 
+.activities .card {
+	margin-top:1em;
+	margin-bottom:1em;
+}
+
+.breadcrumb {
+	margin-bottom:0;
+}
+
 .twitter-follow-button {
 	margin-top: 2em;
 }
