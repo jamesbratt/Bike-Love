@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-	<nav aria-label="breadcrumb">
-  		<ol class="breadcrumb">
-	    	<li class="breadcrumb-item"><a href="/activities">Back to Activities</a></li>
-  		</ol>
-	</nav>
 	<div class="jumbotron jumbotron-fluid">
   		<div class="container">
 	  		<div class="row">
@@ -43,7 +38,9 @@
 					</ul>
 				</div>
 			</div>
-			<div id="individuals" class="col-md-7 offset-md-1"></div>
+			<div id="individuals" class="col-md-7 offset-md-1">
+				<div id="map" style="height:300px;margin-bottom:2em"></div>
+			</div>
 		</div>
 		<div id="interested" class="row invisible">
 	        <div class="col-md-12">
@@ -124,4 +121,6 @@
 <script src="{% static 'circles.min.js' %}"></script>
 <script src="{% static 'jscookie.js' %}"></script>
 <script src="{% static 'lovecalc/achievement-results.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_LYoOfB-svb8m17FvZ8_zuIbmaVfnv5I&libraries=geometry&callback=initMap"
+async defer></script>
 {% endblock scripts %}

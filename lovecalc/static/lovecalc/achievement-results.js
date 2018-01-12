@@ -1,3 +1,12 @@
+var map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
+
 $( document ).ready(function() {
 	
 	if(Cookies.get('feedback') !== 'true') {
@@ -8,6 +17,15 @@ $( document ).ready(function() {
     	var url = window.location.href;
     	var id = url.substring(url.lastIndexOf('/') + 1);
     	return '/activities/calculation/' + id;
+    }
+    
+    function zoomToObject(obj){
+        var bounds = new google.maps.LatLngBounds();
+        var points = obj.getPath().getArray();
+        for (var n = 0; n < points.length ; n++){
+            bounds.extend(points[n]);
+        }
+        map.fitBounds(bounds);
     }
     
     $('#copy-url-btn').on('click', function() {
@@ -40,6 +58,19 @@ $( document ).ready(function() {
 	    		styleWrapper: false,
 	    		styleText: true
     		});
+	    	
+	    	var route = google.maps.geometry.encoding.decodePath(data.activity.route);
+	    	console.log(route);
+	        var line = new google.maps.Polyline({
+	            path: route,
+	            geodesic: true,
+	            strokeColor: '#FF0000',
+	            strokeOpacity: 1.0,
+	            strokeWeight: 2
+	          });
+
+	        line.setMap(map);
+	        zoomToObject(line);
 	    	
 	    	$.each(data.results, function(index, athlete) {
 	    		$('#individuals').append(
